@@ -1,17 +1,14 @@
 package challenges.de.ccc.muc.rad1ochallenges;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.mikepenz.materialdrawer.Drawer;
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         switch (position) {
                             case 0:
-                                PlaceholderFragment fragment = new PlaceholderFragment();
+                                MainFragment fragment = new MainFragment();
                                 fragmentTransaction.replace(R.id.container, fragment);
                                 fragmentTransaction.commit();
                                 break;
@@ -71,13 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
 //use the result object to get different views of the drawer or modify it's data
 //some sample calls
-        result.setSelectionByIdentifier(1);
-        result.openDrawer();
-        result.closeDrawer();
-        result.isDrawerOpen();
+
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new MainFragment())
                     .commit();
         }
     }
@@ -108,23 +102,5 @@ public class MainActivity extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-
-        @Override
-        public void onCreate(Bundle savedInstanceState){
-            super.onCreate(savedInstanceState);
-
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
 }
