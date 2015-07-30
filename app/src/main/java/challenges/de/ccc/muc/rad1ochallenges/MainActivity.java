@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName("Main"),
                         new PrimaryDrawerItem().withName("Register"),
                         new PrimaryDrawerItem().withName("Challenge"),
-                        new PrimaryDrawerItem().withName("Highschool"),
+                        new PrimaryDrawerItem().withName("Highscore"),
                         new PrimaryDrawerItem().withName("Firmware"),
                         new PrimaryDrawerItem().withName("Wiki")
 
@@ -56,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
                                 FragmentRegistration fragmentRegistration = new FragmentRegistration();
 
                                 fragmentTransaction.replace(R.id.container, fragmentRegistration);
+                                fragmentTransaction.commit();
+                                break;
+
+                            case 2:
+                                Log.i("ONCLICK", "Triggered");
+                                FragmentChallengeQuestion fragmentChallenge = new FragmentChallengeQuestion();
+
+                                fragmentTransaction.replace(R.id.container, fragmentChallenge);
                                 fragmentTransaction.commit();
                                 break;
 

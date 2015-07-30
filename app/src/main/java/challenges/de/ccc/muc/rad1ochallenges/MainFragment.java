@@ -2,12 +2,12 @@ package challenges.de.ccc.muc.rad1ochallenges;
 
 import android.app.Fragment;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -17,6 +17,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.PercentFormatter;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
@@ -30,9 +32,8 @@ public  class MainFragment extends Fragment implements
     private PieChart mChart;
     private float[] yData = { 30, 20};
     private String[] xData = { "Completed", "Remaining"};
+    public ImageView profileImage;
 
-
-    private Typeface tf;
 
     public MainFragment() {
     }
@@ -46,8 +47,20 @@ public  class MainFragment extends Fragment implements
 
     }
 
+    public void setDiagrammData(float[]yData){
+        this.yData = yData;
+    }
 
-    private void setData(int count, float range) {
+    public float[] getDiagrammData(){
+        return yData;
+    }
+
+    public void updateDiagramm(){
+        setData();
+    }
+
+
+    private void setData() {
 
 
 
@@ -85,7 +98,7 @@ public  class MainFragment extends Fragment implements
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
-        data.setValueTypeface(tf);
+        //data.setValueTypeface(tf);
         mChart.setData(data);
 
         // undo all highlights
@@ -147,13 +160,15 @@ public  class MainFragment extends Fragment implements
 
         mChart.setCenterText("Challenges Complete \n"+Math.round(yData[0])+" of "+( Math.round(yData[0]+yData[1])));
 
-        setData(2, 100);
+        setData();
 
         mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
         // mChart.spin(2000, 0, 360);
 
-
-
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
+        profileImage = (ImageView) rootView.findViewById(R.id.imageView);
+        imageLoader.displayImage("http://www.ride-on.info/tl_files/bilder_ron_user/profilbilder/member_6350.jpg", profileImage);
         return rootView;
     }
 }
